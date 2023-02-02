@@ -1,33 +1,58 @@
 import { Injectable } from '@nestjs/common';
+import { NotFoundException } from '@nestjs/common/exceptions';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateCommandeMidiDto } from './dto/create-commande-midi.dto';
-import { UpdateCommandeMidiDto } from './dto/update-commande-midi.dto';
+// import { UpdateCommandeMidiDto } from './dto/update-commande-midi.dto';
 import { CommandeMidi } from './entities/commande-midi.entity';
 
 @Injectable()
-export class CommandeMidiService {
+export class CommandesMidiService {
   constructor(
     @InjectRepository(CommandeMidi)
-    private userRepository: Repository<CommandeMidi>,
+    private commandeMidiRepository: Repository<CommandeMidi>,
   ) {}
-  create(createCommandeMidiDto: CreateCommandeMidiDto) {
-    return 'This action adds a new commandeMidi';
+  async create(createCommandeMidiDto: CreateCommandeMidiDto) {
+    return await this.commandeMidiRepository.save(createCommandeMidiDto);
+    // Cette action permet de creer une nouvelle commande-Midi;
   }
 
-  findAll() {
-    return `This action returns all commandeMidi`;
+  async findAll(): Promise<CommandeMidi[]> {
+    return await this.commandeMidiRepository.find();
+    // Cette action renvoi l'ensemble des commandes-Midi;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} commandeMidi`;
-  }
+  // async findOne(idValue: number): Promise<CommandeMidi> {
+  //   const commandeMidifound = await this.commandeMidiRepository.findOneBy({
+  //     commandId: idValue,
+  //   });
+  //   if (!commandeMidifound) {
+  //     throw new NotFoundException(
+  //       `Désolé, nous n'avons pas trouvé de commande MIDI avec l'id ${idValue}`,
+  //     );
+  //   }
+  //   return commandeMidifound;
+  //   // Cette action permet de renvoyer une commande-Midi par son id;
+  // }
 
-  update(id: number, updateCommandeMidiDto: UpdateCommandeMidiDto) {
-    return `This action updates a #${id} commandeMidi`;
-  }
+  // async update(
+  //   id: number,
+  //   updateCommandeMidiDto: UpdateCommandeMidiDto,
+  // ): Promise<CommandeMidi> {
+  //   const upCommandeMidi = await this.findOne(id);
+  //   upCommandeMidi = updateCommandeMidiDto;
+  //   return await this.commandeMidiRepository.save(upCommandeMidi);
+  //   // Cette action permet de modifier une commande-Midi par son id;
+  // }
 
-  remove(id: number) {
-    return `This action removes a #${id} commandeMidi`;
+  async remove(id: number): Promise<string> {
+    const Result = await this.commandeMidiRepository.delete({ id });
+    if (Result.affected === 0) {
+      throw new NotFoundException(
+        `Suppression impossible, car il n'y a pas de Commande-Midi avec l'id ${id}`,
+      );
+    }
+    return `Bravo: La Commande-Midi avec l'id ${id} a bien été supprimée...`;
   }
+  // Cette action permet de supprimer une commande-Midi par son id;
 }

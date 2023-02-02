@@ -1,33 +1,57 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateChansonDto } from './dto/create-chanson.dto';
-import { UpdateChansonDto } from './dto/update-chanson.dto';
+// import { UpdateChansonDto } from './dto/update-chanson.dto';
 import { Chanson } from './entities/chanson.entity';
 
 @Injectable()
-export class ChansonService {
+export class ChansonsService {
   constructor(
     @InjectRepository(Chanson)
-    private userRepository: Repository<Chanson>,
+    private chansonRepository: Repository<Chanson>,
   ) {}
-  create(createChansonDto: CreateChansonDto) {
-    return 'This action adds a new chanson';
+  async create(CreateChansonDto: CreateChansonDto) {
+    return await this.chansonRepository.save(CreateChansonDto);
+    // Cette action permet de creer une nouvelle chanson;
   }
 
-  findAll() {
-    return `This action returns all chanson`;
+  async findAll(): Promise<Chanson[]> {
+    return await this.chansonRepository.find();
+    // Cette action renvoi l'ensemble des chansons;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} chanson`;
-  }
+  // async findOne(idValue: number): Promise<Chanson> {
+  //   const chansonfound = await this.chansonRepository.findOneBy({
+  //     chansonId: idValue,
+  //   });
+  //   if (!chansonfound) {
+  //     throw new NotFoundException(
+  //       `Désolé, nous n'avons pas trouvé de chanson avec l'id ${idValue}`,
+  //     );
+  //   }
+  //   return chansonfound;
+  //   // Cette action permet de renvoyer une chanson par son id;
+  // }
 
-  update(id: number, updateChansonDto: UpdateChansonDto) {
-    return `This action updates a #${id} chanson`;
-  }
+  // async update(
+  //   id: number,
+  //   updateChansonDto: UpdateChansonDto,
+  // ): Promise<Chanson> {
+  //   const upChanson = await this.findOne(id);
+  //   upChanson = updateChansonDto;
+  //   return await this.chansonRepository.save(upChanson);
+  //   // Cette action permet de modifier une chanson par son id;
+  // }
 
-  remove(id: number) {
-    return `This action removes a #${id} chanson`;
+  async remove(id: number): Promise<string> {
+    const Result = await this.chansonRepository.delete({ id });
+    if (Result.affected === 0) {
+      throw new NotFoundException(
+        `Suppression impossible, car il n'y a pas de chanson avec l'id ${id}`,
+      );
+    }
+    return `Bravo: La chanson avec l'id ${id} a bien été supprimée...`;
   }
+  // Cette action permet de supprimer une chanson par son id;
 }

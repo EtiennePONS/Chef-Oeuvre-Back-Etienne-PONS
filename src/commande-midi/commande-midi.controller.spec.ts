@@ -1,17 +1,17 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { CommandeMidiController } from './commande-midi.controller';
-import { CommandeMidiService } from './commande-midi.service';
+import { CommandesMidiController } from './commande-midi.controller';
+import { CommandesMidiService } from './commande-midi.service';
 
 describe('CommandeMidiController', () => {
-  let controller: CommandeMidiController;
+  let controller: CommandesMidiController;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      controllers: [CommandeMidiController],
-      providers: [CommandeMidiService],
+      controllers: [CommandesMidiController],
+      providers: [CommandesMidiService],
     }).compile();
 
-    controller = module.get<CommandeMidiController>(CommandeMidiController);
+    controller = module.get<CommandesMidiController>(CommandesMidiController);
   });
 
   it('should be defined', () => {

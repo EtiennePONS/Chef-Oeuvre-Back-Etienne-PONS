@@ -1,19 +1,21 @@
-import { AssNoteCommande } from 'src/ass-note-commande/entities/ass-note-commande.entity';
 import { Chanson } from 'src/chanson/entities/chanson.entity';
+import { CommandeMidi } from 'src/commande-midi/entities/commande-midi.entity';
 import { Visuel } from 'src/visuel/entities/visuel.entity';
-import { Entity, OneToMany } from 'typeorm';
+import { Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
+@Entity({ name: 'Notes-Midi' })
 export class NoteMidi {
+  @PrimaryGeneratedColumn()
+  id?: number;
+
   @OneToMany(() => Chanson, (chanson) => chanson.noteMidi)
   chanson: Chanson;
 
   @OneToMany(() => Visuel, (visuel) => visuel.noteMidi)
   visuel: Visuel;
 
-  @OneToMany(
-    () => AssNoteCommande,
-    (assNoteCommande) => assNoteCommande.noteMidi,
-  )
-  assNoteCommande: AssNoteCommande;
+  @ManyToMany(() => CommandeMidi, (commandeMidi) => commandeMidi.noteMidi, {
+    eager: true,
+  })
+  commandeMidi: CommandeMidi;
 }

@@ -1,11 +1,13 @@
-import { AssNoteCommande } from 'src/ass-note-commande/entities/ass-note-commande.entity';
-import { Entity, OneToMany } from 'typeorm';
+import { NoteMidi } from 'src/note-midi/entities/note-midi.entity';
+import { Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
+@Entity({ name: 'Commandes-Midi' })
 export class CommandeMidi {
-  @OneToMany(
-    () => AssNoteCommande,
-    (assNoteCommande) => assNoteCommande.commandeMidi,
-  )
-  assNoteCommande: AssNoteCommande;
+  @PrimaryGeneratedColumn()
+  id?: number;
+
+  @ManyToMany(() => NoteMidi, (noteMidi) => noteMidi.commandeMidi, {
+    eager: false,
+  })
+  noteMidi: NoteMidi;
 }

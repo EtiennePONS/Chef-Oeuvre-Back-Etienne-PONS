@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { NoteMidiController } from './note-midi.controller';
-import { NoteMidiService } from './note-midi.service';
+import { NotesMidiService } from './note-midi.service';
 
 describe('NoteMidiController', () => {
   let controller: NoteMidiController;
@@ -8,7 +8,7 @@ describe('NoteMidiController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [NoteMidiController],
-      providers: [NoteMidiService],
+      providers: [NotesMidiService],
     }).compile();
 
     controller = module.get<NoteMidiController>(NoteMidiController);

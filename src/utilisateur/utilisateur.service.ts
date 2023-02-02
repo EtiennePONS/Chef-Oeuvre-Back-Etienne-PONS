@@ -1,33 +1,57 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateUtilisateurDto } from './dto/create-utilisateur.dto';
-import { UpdateUtilisateurDto } from './dto/update-utilisateur.dto';
+// import { UpdateUtilisateurDto } from './dto/update-utilisateur.dto';
 import { Utilisateur } from './entities/utilisateur.entity';
 
 @Injectable()
-export class UtilisateurService {
+export class UtilisateursService {
   constructor(
     @InjectRepository(Utilisateur)
-    private userRepository: Repository<Utilisateur>,
+    private utilisateurrepository: Repository<Utilisateur>,
   ) {}
-  create(createUtilisateurDto: CreateUtilisateurDto) {
-    return 'This action adds a new utilisateur';
+  async create(createUtilisateurDto: CreateUtilisateurDto) {
+    return await this.utilisateurrepository.save(createUtilisateurDto);
+    // Cette action permet de creer un nouvel utilisateur;
   }
 
-  findAll() {
-    return `This action returns all utilisateur`;
+  async findAll(): Promise<Utilisateur[]> {
+    return await this.utilisateurrepository.find();
+    // Cette action renvoi l'ensemble des utilisateurs;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} utilisateur`;
-  }
+  // async findOne(idValue: number): Promise<Utilisateur> {
+  //   const utilisateurfound = await this.utilisateurrepository.findOneBy({
+  //     utilisateurId: idValue,
+  //   });
+  //   if (!utilisateurfound) {
+  //     throw new NotFoundException(
+  //       `Désolé, nous n'avons pas trouvé d'utilisateur' avec l'id ${idValue}`,
+  //     );
+  //   }
+  //   return utilisateurfound;
+  //   // Cette action permet de renvoyer un utilisateur par son id;
+  // }
 
-  update(id: number, updateUtilisateurDto: UpdateUtilisateurDto) {
-    return `This action updates a #${id} utilisateur`;
-  }
+  // async update(
+  //   id: number,
+  //   updateUtilisateurDto: UpdateUtilisateurDto,
+  // ): Promise<Utilisateur> {
+  //   const upUtilisateur = await this.findOne(id);
+  //   upUtilisateur = updateUtilisateurDto;
+  //   return await this.utilisateurrepository.save(upUtilisateur);
+  //   // Cette action permet de modifier un utilisateur par son id;
+  // }
 
-  remove(id: number) {
-    return `This action removes a #${id} utilisateur`;
+  async remove(id: number): Promise<string> {
+    const Result = await this.utilisateurrepository.delete({ id });
+    if (Result.affected === 0) {
+      throw new NotFoundException(
+        `Suppression impossible, car il n'y a pas d'utilisateur avec l'id ${id}`,
+      );
+    }
+    return `Bravo: L'utilisateur avec l'id ${id} a bien été supprimé...`;
   }
+  // Cette action permet de supprimer un utilisateur par son id;
 }

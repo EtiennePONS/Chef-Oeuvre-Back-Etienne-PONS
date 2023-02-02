@@ -1,15 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { CommandeMidiService } from './commande-midi.service';
+import { CommandesMidiService } from './commande-midi.service';
 
 describe('CommandeMidiService', () => {
-  let service: CommandeMidiService;
+  let service: CommandesMidiService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [CommandeMidiService],
+      providers: [CommandesMidiService],
     }).compile();
 
-    service = module.get<CommandeMidiService>(CommandeMidiService);
+    service = module.get<CommandesMidiService>(CommandesMidiService);
   });
 
   it('should be defined', () => {
