@@ -25,15 +25,15 @@ export class ChansonController {
     return this.chansonService.findAll();
   }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.chansonService.findOne(+id);
-  // }
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.chansonService.findOne(+id);
+  }
 
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateChansonDto: UpdateChansonDto) {
-  //   return this.chansonService.update(+id, updateChansonDto);
-  // }
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateChansonDto: UpdateChansonDto) {
+    return this.chansonService.update(+id, updateChansonDto);
+  }
 
   @Delete(':id')
   remove(@Param('id') id: string) {

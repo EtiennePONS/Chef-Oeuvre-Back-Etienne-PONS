@@ -3,6 +3,7 @@ import { NotFoundException } from '@nestjs/common/exceptions';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateNoteMidiDto } from './dto/create-note-midi.dto';
+import { UpdateNoteMidiDto } from './dto/update-note-midi.dto';
 // import { UpdateNoteMidiDto } from './dto/update-note-midi.dto';
 import { NoteMidi } from './entities/note-midi.entity';
 
@@ -22,28 +23,30 @@ export class NotesMidiService {
     // Cette action renvoi l'ensemble des notes-Midi;
   }
 
-  // async findOne(idValue: number): Promise<NoteMidi> {
-  //   const noteMidifound = await this.noteMidiRepository.findOneBy({
-  //     notId: idValue,
-  //   });
-  //   if (!noteMidifound) {
-  //     throw new NotFoundException(
-  //       `Désolé, nous n'avons pas trouvé de note MIDI avec l'id ${idValue}`,
-  //     );
-  //   }
-  //   return noteMidifound;
-  //   // Cette action permet de renvoyer une note-Midi par son id;
-  // }
+  async findOne(idValue: number): Promise<NoteMidi> {
+    const noteMidifound = await this.noteMidiRepository.findOneBy({
+      id: idValue,
+    });
+    if (!noteMidifound) {
+      throw new NotFoundException(
+        `Désolé, nous n'avons pas trouvé de note MIDI avec l'id ${idValue}`,
+      );
+    }
+    return noteMidifound;
+    // Cette action permet de renvoyer une note-Midi par son id;
+  }
 
-  // async update(
-  //   id: number,
-  //   updateNoteMidiDto: UpdateNoteMidiDto,
-  // ): Promise<NoteMidi> {
-  //   const upNoteMidi = await this.findOne(id);
-  //   upNoteMidi = updateNoteMidiDto;
-  //   return await this.noteMidiRepository.save(upNoteMidi);
-  //   // Cette action permet de modifier une note-Midi par son id;
-  // }
+  async update(
+    id: number,
+    updateNoteMidiDto: UpdateNoteMidiDto,
+  ): Promise<NoteMidi> {
+    const upNoteMidi = await this.findOne(id);
+    upNoteMidi.NoteNumber = updateNoteMidiDto.NoteNumber;
+    upNoteMidi.NoteString = updateNoteMidiDto.NoteString;
+    upNoteMidi.Vélocité = updateNoteMidiDto.Vélocité;
+    return await this.noteMidiRepository.save(upNoteMidi);
+    // Cette action permet de modifier une note-Midi par son id;
+  }
 
   async remove(id: number): Promise<string> {
     const Result = await this.noteMidiRepository.delete({ id });

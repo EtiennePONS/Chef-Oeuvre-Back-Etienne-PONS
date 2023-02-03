@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateChansonDto } from './dto/create-chanson.dto';
+import { UpdateChansonDto } from './dto/update-chanson.dto';
 // import { UpdateChansonDto } from './dto/update-chanson.dto';
 import { Chanson } from './entities/chanson.entity';
 
@@ -21,28 +22,37 @@ export class ChansonsService {
     // Cette action renvoi l'ensemble des chansons;
   }
 
-  // async findOne(idValue: number): Promise<Chanson> {
-  //   const chansonfound = await this.chansonRepository.findOneBy({
-  //     chansonId: idValue,
-  //   });
-  //   if (!chansonfound) {
-  //     throw new NotFoundException(
-  //       `Désolé, nous n'avons pas trouvé de chanson avec l'id ${idValue}`,
-  //     );
-  //   }
-  //   return chansonfound;
-  //   // Cette action permet de renvoyer une chanson par son id;
-  // }
+  async findOne(idValue: number): Promise<Chanson> {
+    const chansonfound = await this.chansonRepository.findOneBy({
+      id: idValue,
+    });
+    if (!chansonfound) {
+      throw new NotFoundException(
+        `Désolé, nous n'avons pas trouvé de chanson avec l'id ${idValue}`,
+      );
+    }
+    return chansonfound;
+    // Cette action permet de renvoyer une chanson par son id;
+  }
 
-  // async update(
-  //   id: number,
-  //   updateChansonDto: UpdateChansonDto,
-  // ): Promise<Chanson> {
-  //   const upChanson = await this.findOne(id);
-  //   upChanson = updateChansonDto;
-  //   return await this.chansonRepository.save(upChanson);
-  //   // Cette action permet de modifier une chanson par son id;
-  // }
+  async update(
+    id: number,
+    updateChansonDto: UpdateChansonDto,
+  ): Promise<Chanson> {
+    const upChanson = await this.findOne(id);
+    upChanson.Titre = updateChansonDto.Titre;
+    upChanson.Auteur = updateChansonDto.Auteur;
+    upChanson.Tonalité = updateChansonDto.Tonalité;
+    upChanson.Tempo = updateChansonDto.Tempo;
+    upChanson.Durée = updateChansonDto.Durée;
+    upChanson.TimeSignature = updateChansonDto.TimeSignature;
+    upChanson.Image = updateChansonDto.Image;
+    upChanson.CanalMidi = updateChansonDto.CanalMidi;
+    upChanson.PgmMidi = updateChansonDto.PgmMidi;
+
+    return await this.chansonRepository.save(upChanson);
+    // Cette action permet de modifier une chanson par son id;
+  }
 
   async remove(id: number): Promise<string> {
     const Result = await this.chansonRepository.delete({ id });

@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateUtilisateurDto } from './dto/create-utilisateur.dto';
+import { UpdateUtilisateurDto } from './dto/update-utilisateur.dto';
 // import { UpdateUtilisateurDto } from './dto/update-utilisateur.dto';
 import { Utilisateur } from './entities/utilisateur.entity';
 
@@ -21,28 +22,31 @@ export class UtilisateursService {
     // Cette action renvoi l'ensemble des utilisateurs;
   }
 
-  // async findOne(idValue: number): Promise<Utilisateur> {
-  //   const utilisateurfound = await this.utilisateurrepository.findOneBy({
-  //     utilisateurId: idValue,
-  //   });
-  //   if (!utilisateurfound) {
-  //     throw new NotFoundException(
-  //       `Désolé, nous n'avons pas trouvé d'utilisateur' avec l'id ${idValue}`,
-  //     );
-  //   }
-  //   return utilisateurfound;
-  //   // Cette action permet de renvoyer un utilisateur par son id;
-  // }
+  async findOne(idValue: number): Promise<Utilisateur> {
+    const utilisateurfound = await this.utilisateurrepository.findOneBy({
+      id: idValue,
+    });
+    if (!utilisateurfound) {
+      throw new NotFoundException(
+        `Désolé, nous n'avons pas trouvé d'utilisateur' avec l'id ${idValue}`,
+      );
+    }
+    return utilisateurfound;
+    // Cette action permet de renvoyer un utilisateur par son id;
+  }
 
-  // async update(
-  //   id: number,
-  //   updateUtilisateurDto: UpdateUtilisateurDto,
-  // ): Promise<Utilisateur> {
-  //   const upUtilisateur = await this.findOne(id);
-  //   upUtilisateur = updateUtilisateurDto;
-  //   return await this.utilisateurrepository.save(upUtilisateur);
-  //   // Cette action permet de modifier un utilisateur par son id;
-  // }
+  async update(
+    id: number,
+    updateUtilisateurDto: UpdateUtilisateurDto,
+  ): Promise<Utilisateur> {
+    const upUtilisateur = await this.findOne(id);
+    upUtilisateur.Firstname = updateUtilisateurDto.Firstname;
+    upUtilisateur.Name = updateUtilisateurDto.Name;
+    upUtilisateur.Email = updateUtilisateurDto.Email;
+    upUtilisateur.Password = updateUtilisateurDto.Password;
+    return await this.utilisateurrepository.save(upUtilisateur);
+    // Cette action permet de modifier un utilisateur par son id;
+  }
 
   async remove(id: number): Promise<string> {
     const Result = await this.utilisateurrepository.delete({ id });

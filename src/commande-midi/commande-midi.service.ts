@@ -3,6 +3,7 @@ import { NotFoundException } from '@nestjs/common/exceptions';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateCommandeMidiDto } from './dto/create-commande-midi.dto';
+import { UpdateCommandeMidiDto } from './dto/update-commande-midi.dto';
 // import { UpdateCommandeMidiDto } from './dto/update-commande-midi.dto';
 import { CommandeMidi } from './entities/commande-midi.entity';
 
@@ -22,28 +23,29 @@ export class CommandesMidiService {
     // Cette action renvoi l'ensemble des commandes-Midi;
   }
 
-  // async findOne(idValue: number): Promise<CommandeMidi> {
-  //   const commandeMidifound = await this.commandeMidiRepository.findOneBy({
-  //     commandId: idValue,
-  //   });
-  //   if (!commandeMidifound) {
-  //     throw new NotFoundException(
-  //       `Désolé, nous n'avons pas trouvé de commande MIDI avec l'id ${idValue}`,
-  //     );
-  //   }
-  //   return commandeMidifound;
-  //   // Cette action permet de renvoyer une commande-Midi par son id;
-  // }
+  async findOne(idValue: number): Promise<CommandeMidi> {
+    const commandeMidifound = await this.commandeMidiRepository.findOneBy({
+      id: idValue,
+    });
+    if (!commandeMidifound) {
+      throw new NotFoundException(
+        `Désolé, nous n'avons pas trouvé de commande MIDI avec l'id ${idValue}`,
+      );
+    }
+    return commandeMidifound;
+    // Cette action permet de renvoyer une commande-Midi par son id;
+  }
 
-  // async update(
-  //   id: number,
-  //   updateCommandeMidiDto: UpdateCommandeMidiDto,
-  // ): Promise<CommandeMidi> {
-  //   const upCommandeMidi = await this.findOne(id);
-  //   upCommandeMidi = updateCommandeMidiDto;
-  //   return await this.commandeMidiRepository.save(upCommandeMidi);
-  //   // Cette action permet de modifier une commande-Midi par son id;
-  // }
+  async update(
+    id: number,
+    updateCommandeMidiDto: UpdateCommandeMidiDto,
+  ): Promise<CommandeMidi> {
+    const upCommandeMidi = await this.findOne(id);
+    upCommandeMidi.CommandeMidi = updateCommandeMidiDto.CommandeMidi;
+    upCommandeMidi.CanalMidi = updateCommandeMidiDto.CanalMidi;
+    return await this.commandeMidiRepository.save(upCommandeMidi);
+    // Cette action permet de modifier une commande-Midi par son id;
+  }
 
   async remove(id: number): Promise<string> {
     const Result = await this.commandeMidiRepository.delete({ id });
