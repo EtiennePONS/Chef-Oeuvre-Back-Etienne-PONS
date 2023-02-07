@@ -15,14 +15,14 @@ export class NoteMidi {
   @PrimaryGeneratedColumn()
   id?: number;
 
+  @Column({ nullable: true })
+  Vélocité: number;
+
   @Column({ nullable: false })
   NoteNumber: number;
 
   @Column({ nullable: false })
   NoteString: string;
-
-  @Column({ nullable: false })
-  Vélocité: number;
 
   @OneToMany(() => Chanson, (chanson) => chanson.noteMidi)
   chanson: Chanson[];

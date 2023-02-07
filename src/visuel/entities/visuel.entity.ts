@@ -3,7 +3,7 @@ import { NoteMidi } from 'src/note-midi/entities/note-midi.entity';
 import { Utilisateur } from 'src/utilisateur/entities/utilisateur.entity';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity({ name: 'Visuels' })
+@Entity({ name: 'visuels' })
 export class Visuel {
   @PrimaryGeneratedColumn()
   id?: number;

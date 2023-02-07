@@ -25,18 +25,18 @@ export class NoteMidiController {
     return this.noteMidiService.findAll();
   }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.noteMidiService.findOne(+id);
-  // }
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.noteMidiService.findOne(+id);
+  }
 
-  // @Patch(':id')
-  // update(
-  //   @Param('id') id: string,
-  //   @Body() updateNoteMidiDto: UpdateNoteMidiDto,
-  // ) {
-  //   return this.noteMidiService.update(+id, updateNoteMidiDto);
-  // }
+  @Patch(':id')
+  update(
+    @Param('id') id: string,
+    @Body() updateNoteMidiDto: UpdateNoteMidiDto,
+  ) {
+    return this.noteMidiService.update(+id, updateNoteMidiDto);
+  }
 
   @Delete(':id')
   remove(@Param('id') id: string) {

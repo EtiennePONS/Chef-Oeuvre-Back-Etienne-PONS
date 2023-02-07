@@ -2,7 +2,7 @@ import { Chanson } from 'src/chanson/entities/chanson.entity';
 import { Visuel } from 'src/visuel/entities/visuel.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity({ name: 'Musicien-Utilisateur' })
+@Entity({ name: 'musicienUtilisateur' })
 export class Utilisateur {
   @PrimaryGeneratedColumn()
   id?: number;

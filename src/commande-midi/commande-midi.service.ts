@@ -4,7 +4,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateCommandeMidiDto } from './dto/create-commande-midi.dto';
 import { UpdateCommandeMidiDto } from './dto/update-commande-midi.dto';
-// import { UpdateCommandeMidiDto } from './dto/update-commande-midi.dto';
 import { CommandeMidi } from './entities/commande-midi.entity';
 
 @Injectable()
@@ -42,7 +41,8 @@ export class CommandesMidiService {
   ): Promise<CommandeMidi> {
     const upCommandeMidi = await this.findOne(id);
     upCommandeMidi.CommandeMidi = updateCommandeMidiDto.CommandeMidi;
-    upCommandeMidi.CanalMidi = updateCommandeMidiDto.CanalMidi;
+    upCommandeMidi.Canalnumber = updateCommandeMidiDto.Canalnumber;
+    upCommandeMidi.Canalstring = updateCommandeMidiDto.Canalstring;
     return await this.commandeMidiRepository.save(upCommandeMidi);
     // Cette action permet de modifier une commande-Midi par son id;
   }

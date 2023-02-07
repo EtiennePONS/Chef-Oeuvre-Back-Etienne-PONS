@@ -3,5 +3,6 @@ import { CreateCommandeMidiDto } from './create-commande-midi.dto';
 
 export class UpdateCommandeMidiDto extends PartialType(CreateCommandeMidiDto) {
   CommandeMidi: number;
-  CanalMidi: number;
+  Canalnumber: number;
+  Canalstring: string;
 }

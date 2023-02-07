@@ -4,7 +4,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateNoteMidiDto } from './dto/create-note-midi.dto';
 import { UpdateNoteMidiDto } from './dto/update-note-midi.dto';
-// import { UpdateNoteMidiDto } from './dto/update-note-midi.dto';
 import { NoteMidi } from './entities/note-midi.entity';
 
 @Injectable()

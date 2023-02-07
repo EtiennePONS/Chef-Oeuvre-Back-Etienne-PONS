@@ -25,18 +25,18 @@ export class CommandesMidiController {
     return this.commandeMidiService.findAll();
   }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.commandeMidiService.findOne(+id);
-  // }
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.commandeMidiService.findOne(+id);
+  }
 
-  // @Patch(':id')
-  // update(
-  //   @Param('id') id: string,
-  //   @Body() updateCommandeMidiDto: UpdateCommandeMidiDto,
-  // ) {
-  //   return this.commandeMidiService.update(+id, updateCommandeMidiDto);
-  // }
+  @Patch(':id')
+  update(
+    @Param('id') id: string,
+    @Body() updateCommandeMidiDto: UpdateCommandeMidiDto,
+  ) {
+    return this.commandeMidiService.update(+id, updateCommandeMidiDto);
+  }
 
   @Delete(':id')
   remove(@Param('id') id: string) {

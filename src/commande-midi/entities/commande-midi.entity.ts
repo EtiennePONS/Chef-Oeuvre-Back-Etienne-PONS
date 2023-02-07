@@ -1,11 +1,5 @@
 import { NoteMidi } from 'src/note-midi/entities/note-midi.entity';
-import {
-  Column,
-  Entity,
-  JoinTable,
-  ManyToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'Commandes-Midi' })
 export class CommandeMidi {
@@ -16,7 +10,10 @@ export class CommandeMidi {
   CommandeMidi: number;
 
   @Column({ nullable: false })
-  CanalMidi: number;
+  Canalnumber: number;
+
+  @Column({ nullable: false })
+  Canalstring: string;
 
   @ManyToMany(() => NoteMidi, (noteMidi) => noteMidi.commandeMidi, {
     eager: false,

@@ -25,15 +25,15 @@ export class VisuelController {
     return this.visuelService.findAll();
   }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.visuelService.findOne(+id);
-  // }
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.visuelService.findOne(+id);
+  }
 
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateVisuelDto: UpdateVisuelDto) {
-  //   return this.visuelService.update(+id, updateVisuelDto);
-  // }
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateVisuelDto: UpdateVisuelDto) {
+    return this.visuelService.update(+id, updateVisuelDto);
+  }
 
   @Delete(':id')
   remove(@Param('id') id: string) {

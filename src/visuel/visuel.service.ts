@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateVisuelDto } from './dto/create-visuel.dto';
 import { UpdateVisuelDto } from './dto/update-visuel.dto';
-// import { UpdateVisuelDto } from './dto/update-visuel.dto';
 import { Visuel } from './entities/visuel.entity';
 
 @Injectable()
