@@ -41,7 +41,6 @@ export class CommandesMidiService {
   ): Promise<CommandeMidi> {
     const upCommandeMidi = await this.findOne(id);
     upCommandeMidi.CommandeMidi = updateCommandeMidiDto.CommandeMidi;
-    upCommandeMidi.Canalnumber = updateCommandeMidiDto.Canalnumber;
     upCommandeMidi.Canalstring = updateCommandeMidiDto.Canalstring;
     return await this.commandeMidiRepository.save(upCommandeMidi);
     // Cette action permet de modifier une commande-Midi par son id;

@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { ChargeDto } from './dto/charge-chanson.dto';
 import { CreateChansonDto } from './dto/create-chanson.dto';
 import { UpdateChansonDto } from './dto/update-chanson.dto';
 import { Chanson } from './entities/chanson.entity';
@@ -14,6 +15,21 @@ export class ChansonsService {
   async create(CreateChansonDto: CreateChansonDto) {
     return await this.chansonRepository.save(CreateChansonDto);
     // Cette action permet de creer une nouvelle chanson;
+  }
+  async charge(chargeDto: ChargeDto): Promise<Chanson> {
+    const PgmMidi = chargeDto.PgmMidi;
+    const CanalMidi = chargeDto.CanalMidi;
+    const chansonfound = await this.chansonRepository.findOneBy({
+      CanalMidi,
+      PgmMidi,
+    });
+
+    if (!chansonfound) {
+      throw new NotFoundException(
+        `désolé nous n'avons Pas de chanson, sur cette commande Midi`,
+      );
+    }
+    return chansonfound;
   }
 
   async findAll(): Promise<Chanson[]> {
@@ -40,12 +56,12 @@ export class ChansonsService {
   ): Promise<Chanson> {
     const upChanson = await this.findOne(id);
     upChanson.Titre = updateChansonDto.Titre;
-    upChanson.Auteur = updateChansonDto.Auteur;
-    upChanson.Tonalité = updateChansonDto.Tonalité;
-    upChanson.Tempo = updateChansonDto.Tempo;
-    upChanson.Durée = updateChansonDto.Durée;
-    upChanson.TimeSignature = updateChansonDto.TimeSignature;
-    upChanson.Image = updateChansonDto.Image;
+    // upChanson.Auteur = updateChansonDto.Auteur;
+    // upChanson.Tonalité = updateChansonDto.Tonalité;
+    // upChanson.Tempo = updateChansonDto.Tempo;
+    // upChanson.Durée = updateChansonDto.Durée;
+    // upChanson.TimeSignature = updateChansonDto.TimeSignature;
+    // upChanson.Image = updateChansonDto.Image;
     upChanson.CanalMidi = updateChansonDto.CanalMidi;
     upChanson.PgmMidi = updateChansonDto.PgmMidi;
 

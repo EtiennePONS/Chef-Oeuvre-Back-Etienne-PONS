@@ -41,8 +41,9 @@ export class NotesMidiService {
   ): Promise<NoteMidi> {
     const upNoteMidi = await this.findOne(id);
     upNoteMidi.NoteNumber = updateNoteMidiDto.NoteNumber;
-    upNoteMidi.NoteString = updateNoteMidiDto.NoteString;
     upNoteMidi.Vélocité = updateNoteMidiDto.Vélocité;
+    upNoteMidi.NoteString = updateNoteMidiDto.NoteString;
+
     return await this.noteMidiRepository.save(upNoteMidi);
     // Cette action permet de modifier une note-Midi par son id;
   }

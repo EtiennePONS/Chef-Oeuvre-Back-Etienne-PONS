@@ -1,8 +1,9 @@
+/* eslint-disable prettier/prettier */
 import { PartialType } from '@nestjs/mapped-types';
 import { CreateChansonDto } from './create-chanson.dto';
 
-export class UpdateChansonDto extends PartialType(CreateChansonDto) {
-  Titre: string;
+export class ChargeDto extends PartialType(CreateChansonDto) {
+  // Titre: string;
   // Auteur: string;
   // Tonalité: string;
   // Tempo: string;

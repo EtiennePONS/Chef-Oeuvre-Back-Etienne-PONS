@@ -15,11 +15,11 @@ export class NoteMidi {
   @PrimaryGeneratedColumn()
   id?: number;
 
-  @Column({ nullable: true })
-  Vélocité: number;
-
   @Column({ nullable: false })
   NoteNumber: number;
+
+  @Column({ nullable: true })
+  Vélocité: number;
 
   @Column({ nullable: false })
   NoteString: string;

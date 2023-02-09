@@ -8,6 +8,7 @@ import {
   Delete,
 } from '@nestjs/common';
 import { ChansonsService } from './chanson.service';
+import { ChargeDto } from './dto/charge-chanson.dto';
 import { CreateChansonDto } from './dto/create-chanson.dto';
 import { UpdateChansonDto } from './dto/update-chanson.dto';
 
@@ -18,6 +19,11 @@ export class ChansonController {
   @Post()
   create(@Body() createChansonDto: CreateChansonDto) {
     return this.chansonService.create(createChansonDto);
+  }
+
+  @Post('/charge')
+  charge(@Body() chargeDto: ChargeDto) {
+    return this.chansonService.charge(chargeDto);
   }
 
   @Get()

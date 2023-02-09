@@ -1,5 +1,5 @@
 export class CreateNoteMidiDto {
   NoteNumber: number;
-  NoteString: string;
   Vélocité: number;
+  NoteString: string;
 }

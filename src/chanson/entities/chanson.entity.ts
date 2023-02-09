@@ -9,7 +9,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-@Entity({ name: 'chansons' })
+@Entity({ name: 'Chansons' })
 export class Chanson {
   @PrimaryGeneratedColumn()
   id?: number;
@@ -17,23 +17,23 @@ export class Chanson {
   @Column({ nullable: false, type: 'varchar', length: 100 })
   Titre: string;
 
-  @Column({ nullable: false, type: 'varchar', length: 50 })
-  Auteur: string;
+  // @Column({ nullable: false, type: 'varchar', length: 50 })
+  // Auteur: string;
 
-  @Column({ nullable: true, type: 'varchar', length: 20 })
-  Tonalité: string;
+  // @Column({ nullable: true, type: 'varchar', length: 20 })
+  // Tonalité: string;
 
-  @Column({ nullable: false, type: 'varchar', length: 20 })
-  Tempo: string;
+  // @Column({ nullable: false, type: 'varchar', length: 20 })
+  // Tempo: string;
 
-  @Column({ nullable: false, type: 'varchar', length: 20 })
-  Durée: number;
+  // @Column({ nullable: false, type: 'varchar', length: 20 })
+  // Durée: number;
 
-  @Column({ nullable: false, type: 'varchar', length: 20 })
-  TimeSignature: string;
+  // @Column({ nullable: false, type: 'varchar', length: 20 })
+  // TimeSignature: string;
 
-  @Column({ nullable: false, type: 'varchar', length: 100 })
-  Image: string;
+  // @Column({ nullable: false, type: 'varchar', length: 100 })
+  // Image: string;
 
   @Column({ nullable: false, type: 'varchar', length: 255 })
   CanalMidi: number;

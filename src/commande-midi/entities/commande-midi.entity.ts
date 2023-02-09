@@ -10,9 +10,6 @@ export class CommandeMidi {
   CommandeMidi: number;
 
   @Column({ nullable: false })
-  Canalnumber: number;
-
-  @Column({ nullable: false })
   Canalstring: string;
 
   @ManyToMany(() => NoteMidi, (noteMidi) => noteMidi.commandeMidi, {
