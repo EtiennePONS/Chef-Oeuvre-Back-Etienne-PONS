@@ -2,7 +2,7 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { CreateChansonDto } from './create-chanson.dto';
 
-export class ChargeDto extends PartialType(CreateChansonDto) {
+export class ChargeChansonDto extends PartialType(CreateChansonDto) {
   // Titre: string;
   // Auteur: string;
   // Tonalité: string;

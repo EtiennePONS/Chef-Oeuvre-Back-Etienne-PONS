@@ -10,6 +10,7 @@ import {
 import { VisuelsService } from './visuel.service';
 import { CreateVisuelDto } from './dto/create-visuel.dto';
 import { UpdateVisuelDto } from './dto/update-visuel.dto';
+import { ChargeVisuelDto } from './dto/charge-visuel.dto';
 
 @Controller('visuel')
 export class VisuelController {
@@ -18,6 +19,10 @@ export class VisuelController {
   @Post()
   create(@Body() createVisuelDto: CreateVisuelDto) {
     return this.visuelService.create(createVisuelDto);
+  }
+  @Post('/charge')
+  charge(@Body() chargeVisuelDto: ChargeVisuelDto) {
+    return this.visuelService.charge(chargeVisuelDto);
   }
 
   @Get()

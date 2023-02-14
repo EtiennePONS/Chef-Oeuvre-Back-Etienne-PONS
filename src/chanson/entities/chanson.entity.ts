@@ -35,10 +35,10 @@ export class Chanson {
   // @Column({ nullable: false, type: 'varchar', length: 100 })
   // Image: string;
 
-  @Column({ nullable: false, type: 'varchar', length: 255 })
+  @Column()
   CanalMidi: number;
 
-  @Column({ nullable: false, type: 'varchar', length: 255 })
+  @Column()
   PgmMidi: number;
 
   @ManyToOne(() => Utilisateur, (utilisateur) => utilisateur.chanson)

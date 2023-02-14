@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { ChargeVisuelDto } from './dto/charge-visuel.dto';
 import { CreateVisuelDto } from './dto/create-visuel.dto';
 import { UpdateVisuelDto } from './dto/update-visuel.dto';
 import { Visuel } from './entities/visuel.entity';
@@ -15,7 +16,24 @@ export class VisuelsService {
     return await this.visuelRepository.save(createVisuelDto);
     // Cette action permet de creer un nouveau visuel;
   }
+  async charge(chargeVisuelDto: ChargeVisuelDto): Promise<Visuel> {
+    const CanalMidi = chargeVisuelDto.CanalMidi;
+    const PgmMidi = chargeVisuelDto.PgmMidi;
+    const NoteMidi = chargeVisuelDto.NoteMidi;
 
+    const visuelfound = await this.visuelRepository.findOneBy({
+      CanalMidi,
+      PgmMidi,
+      NoteMidi,
+    });
+
+    if (!visuelfound) {
+      throw new NotFoundException(
+        `désolé nous n'avons Pas de chanson, sur cette commande Midi`,
+      );
+    }
+    return visuelfound;
+  }
   async findAll(): Promise<Visuel[]> {
     return await this.visuelRepository.find();
     // Cette action renvoi l'ensemble des visuels;
@@ -37,8 +55,8 @@ export class VisuelsService {
   async update(id: number, updateVisuelDto: UpdateVisuelDto): Promise<Visuel> {
     const upViuel = await this.findOne(id);
     upViuel.Visuel = updateVisuelDto.Visuel;
-    upViuel.Commentaire = updateVisuelDto.Commentaire;
-    upViuel.NoteString = updateVisuelDto.NoteString;
+    // upViuel.Commentaire = updateVisuelDto.Commentaire;
+    // upViuel.NoteString = updateVisuelDto.NoteString;
     return await this.visuelRepository.save(upViuel);
     // Cette action permet de modifier un visuel par son id;
   }

@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { ChargeDto } from './dto/charge-chanson.dto';
+import { ChargeChansonDto } from './dto/charge-chanson.dto';
 import { CreateChansonDto } from './dto/create-chanson.dto';
 import { UpdateChansonDto } from './dto/update-chanson.dto';
 import { Chanson } from './entities/chanson.entity';
@@ -16,9 +16,9 @@ export class ChansonsService {
     return await this.chansonRepository.save(CreateChansonDto);
     // Cette action permet de creer une nouvelle chanson;
   }
-  async charge(chargeDto: ChargeDto): Promise<Chanson> {
-    const PgmMidi = chargeDto.PgmMidi;
-    const CanalMidi = chargeDto.CanalMidi;
+  async charge(chargeChansonDto: ChargeChansonDto): Promise<Chanson> {
+    const PgmMidi = chargeChansonDto.PgmMidi;
+    const CanalMidi = chargeChansonDto.CanalMidi;
     const chansonfound = await this.chansonRepository.findOneBy({
       CanalMidi,
       PgmMidi,
