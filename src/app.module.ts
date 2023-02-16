@@ -13,6 +13,7 @@ import { Visuel } from './visuel/entities/visuel.entity';
 import { Utilisateur } from './utilisateur/entities/utilisateur.entity';
 import { NoteMidi } from './note-midi/entities/note-midi.entity';
 import { CommandeMidi } from './commande-midi/entities/commande-midi.entity';
+import { AuthModule } from './auth/auth.module';
 
 dotenv.config({ path: '.env' });
 
@@ -34,6 +35,7 @@ dotenv.config({ path: '.env' });
     VisuelModule,
     NoteMidiModule,
     CommandeMidiModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
