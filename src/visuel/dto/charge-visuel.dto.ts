@@ -1,10 +1,12 @@
 /* eslint-disable prettier/prettier */
 import { PartialType } from '@nestjs/mapped-types';
-import { CreateVisuelDto } from './create-visuel.dto';
+import { ChargeChansonDto } from 'src/chanson/dto/charge-chanson.dto';
 
-export class ChargeVisuelDto extends PartialType(CreateVisuelDto) {
+export class ChargeVisuelDto extends PartialType(ChargeChansonDto) {
   Visuel: string;
+  NoteMidi: number;
+  Chanson:{
   CanalMidi: number;
   PgmMidi: number;
-  NoteMidi: number;
+}
 }

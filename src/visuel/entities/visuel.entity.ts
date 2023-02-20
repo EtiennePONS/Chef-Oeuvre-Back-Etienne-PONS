@@ -29,8 +29,11 @@ export class Visuel {
   @ManyToOne(() => Utilisateur, (utilisateur) => utilisateur.visuel)
   utilisateur: Utilisateur[];
 
-  @ManyToOne(() => Chanson, (chanson) => chanson.visuel)
-  chanson: Chanson[];
+  @ManyToOne(() => Chanson, (chanson) => chanson.visuel, {
+    nullable: false,
+    eager: true,
+  })
+  chanson: Chanson;
 
   @ManyToOne(() => NoteMidi, (noteMidi) => noteMidi.visuel)
   noteMidi: NoteMidi[];
