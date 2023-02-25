@@ -55,7 +55,12 @@ export class VisuelsService {
   async update(id: number, updateVisuelDto: UpdateVisuelDto): Promise<Visuel> {
     const upViuel = await this.findOne(id);
     upViuel.Visuel = updateVisuelDto.Visuel;
-    // upViuel.Commentaire = updateVisuelDto.Commentaire;
+    upViuel.CanalMidi = updateVisuelDto.CanalMidi;
+    upViuel.PgmMidi = updateVisuelDto.PgmMidi;
+    upViuel.NoteMidi = updateVisuelDto.NoteMidi;
+    upViuel.chanson.id = updateVisuelDto.chanson.id;
+
+
     // upViuel.NoteString = updateVisuelDto.NoteString;
     return await this.visuelRepository.save(upViuel);
     // Cette action permet de modifier un visuel par son id;

@@ -1,5 +1,6 @@
+/* eslint-disable prettier/prettier */
 export class CreateVisuelDto {
   Visuel: string;
-  Commentaire: string;
-  NoteString: string;
-}
+  NoteMidi: number;
+  chansonId:number;
+  }

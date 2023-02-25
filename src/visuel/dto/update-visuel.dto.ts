@@ -1,8 +1,12 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateVisuelDto } from './create-visuel.dto';
-
-export class UpdateVisuelDto extends PartialType(CreateVisuelDto) {
+/* eslint-disable prettier/prettier */
+export class UpdateVisuelDto {
   Visuel: string;
-  Commentaire: string;
-  // NoteString: string;
+  PgmMidi: number;
+  CanalMidi: number;
+  NoteMidi: number;
+  chanson:{
+    id: number
+    PgmMidi: number;
+    CanalMidi: number;
+  };
 }
