@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Chanson } from 'src/chanson/entities/chanson.entity';
 import { NoteMidi } from 'src/note-midi/entities/note-midi.entity';
 import { Utilisateur } from 'src/utilisateur/entities/utilisateur.entity';
@@ -21,11 +20,8 @@ export class Visuel {
   @Column()
   NoteMidi: number;
 
-  // @Column({ nullable: true, type: 'varchar', length: 50 })
-  // Commentaire: string;
-
-  // @Column({ nullable: true, type: 'varchar', length: 50 })
-  // NoteString: string;
+  @Column({ nullable: true })
+  Image: string;
 
   @ManyToOne(() => Utilisateur, (utilisateur) => utilisateur.visuel)
   utilisateur: Utilisateur[];

@@ -1,6 +1,4 @@
-/* eslint-disable prettier/prettier */
-import { NoteMidi } from 'src/note-midi/entities/note-midi.entity';
-import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'Commandes-Midi' })
 export class CommandeMidi {
@@ -12,9 +10,4 @@ export class CommandeMidi {
 
   @Column({ nullable: false })
   Canalstring: string;
-
-  // @ManyToMany(() => NoteMidi, (noteMidi) => noteMidi.commandeMidi, {
-  //   eager: false,
-  // })
-  // noteMidi: NoteMidi[];
 }

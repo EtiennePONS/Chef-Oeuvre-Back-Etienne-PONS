@@ -34,6 +34,7 @@ export class VisuelsService {
       );
     }
     return visuelfound;
+    // Cette action renvoi d'un visuel en fonction du body envoyé dans la requette;
   }
   async findAll(): Promise<Visuel[]> {
     return await this.visuelRepository.find();
@@ -61,8 +62,6 @@ export class VisuelsService {
     upVisuel.NoteMidi = updateVisuelDto.NoteMidi;
     upVisuel.chanson = updateVisuelDto.chanson;
     upVisuel.noteMidi = updateVisuelDto.noteMidi;
-
-    // upViuel.NoteString = updateVisuelDto.NoteString;
     return await this.visuelRepository.save(upVisuel);
     // Cette action permet de modifier un visuel par son id;
   }
@@ -75,6 +74,6 @@ export class VisuelsService {
       );
     }
     return `Bravo: Le visuel avec l'id ${id} a bien été supprimé...`;
+    // Cette action permet de supprimer un visuel par son id;
   }
-  // Cette action permet de supprimer un visuel par son id;
 }

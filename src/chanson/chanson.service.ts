@@ -16,6 +16,7 @@ export class ChansonsService {
     return await this.chansonRepository.save(CreateChansonDto);
     // Cette action permet de creer une nouvelle chanson;
   }
+
   async charge(chargeChansonDto: ChargeChansonDto): Promise<Chanson> {
     const PgmMidi = chargeChansonDto.PgmMidi;
     const CanalMidi = chargeChansonDto.CanalMidi;
@@ -30,6 +31,7 @@ export class ChansonsService {
       );
     }
     return chansonfound;
+    // Cette action renvoi une chansons en fonction du body envoyé dans la requette;
   }
 
   async findAll(): Promise<Chanson[]> {
@@ -47,7 +49,7 @@ export class ChansonsService {
       );
     }
     return chansonfound;
-    // Cette action permet de renvoyer une chanson par son id;
+    // Cette action permet de trouver une chanson par son id;
   }
 
   async update(
@@ -56,12 +58,6 @@ export class ChansonsService {
   ): Promise<Chanson> {
     const upChanson = await this.findOne(id);
     upChanson.Titre = updateChansonDto.Titre;
-    // upChanson.Auteur = updateChansonDto.Auteur;
-    // upChanson.Tonalité = updateChansonDto.Tonalité;
-    // upChanson.Tempo = updateChansonDto.Tempo;
-    // upChanson.Durée = updateChansonDto.Durée;
-    // upChanson.TimeSignature = updateChansonDto.TimeSignature;
-    // upChanson.Image = updateChansonDto.Image;
     upChanson.CanalMidi = updateChansonDto.CanalMidi;
     upChanson.PgmMidi = updateChansonDto.PgmMidi;
 
@@ -77,6 +73,6 @@ export class ChansonsService {
       );
     }
     return `Bravo: La chanson avec l'id ${id} a bien été supprimée...`;
+    // Cette action permet de supprimer une chanson par son id;
   }
-  // Cette action permet de supprimer une chanson par son id;
 }

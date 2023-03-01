@@ -46,7 +46,4 @@ export class Chanson {
 
   @OneToMany(() => Visuel, (visuel) => visuel.chanson)
   visuel: Visuel[];
-
-  // @ManyToOne(() => NoteMidi, (NoteMidi) => NoteMidi.chanson)
-  // noteMidi: NoteMidi[];
 }
