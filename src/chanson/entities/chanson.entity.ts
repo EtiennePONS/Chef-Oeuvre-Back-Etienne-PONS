@@ -1,4 +1,4 @@
-import { NoteMidi } from 'src/note-midi/entities/note-midi.entity';
+/* eslint-disable prettier/prettier */
 import { Utilisateur } from 'src/utilisateur/entities/utilisateur.entity';
 import { Visuel } from 'src/visuel/entities/visuel.entity';
 import {
@@ -47,6 +47,6 @@ export class Chanson {
   @OneToMany(() => Visuel, (visuel) => visuel.chanson)
   visuel: Visuel[];
 
-  @ManyToOne(() => NoteMidi, (NoteMidi) => NoteMidi.chanson)
-  noteMidi: NoteMidi[];
+  // @ManyToOne(() => NoteMidi, (NoteMidi) => NoteMidi.chanson)
+  // noteMidi: NoteMidi[];
 }

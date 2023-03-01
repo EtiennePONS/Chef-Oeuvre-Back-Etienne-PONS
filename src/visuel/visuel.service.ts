@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -53,16 +54,16 @@ export class VisuelsService {
   }
 
   async update(id: number, updateVisuelDto: UpdateVisuelDto): Promise<Visuel> {
-    const upViuel = await this.findOne(id);
-    upViuel.Visuel = updateVisuelDto.Visuel;
-    upViuel.CanalMidi = updateVisuelDto.CanalMidi;
-    upViuel.PgmMidi = updateVisuelDto.PgmMidi;
-    upViuel.NoteMidi = updateVisuelDto.NoteMidi;
-    upViuel.chanson.id = updateVisuelDto.chanson.id;
-
+    const upVisuel = await this.findOne(id);
+    upVisuel.Visuel = updateVisuelDto.Visuel;
+    upVisuel.CanalMidi = updateVisuelDto.CanalMidi;
+    upVisuel.PgmMidi = updateVisuelDto.PgmMidi;
+    upVisuel.NoteMidi = updateVisuelDto.NoteMidi;
+    upVisuel.chanson = updateVisuelDto.chanson;
+    upVisuel.noteMidi = updateVisuelDto.noteMidi;
 
     // upViuel.NoteString = updateVisuelDto.NoteString;
-    return await this.visuelRepository.save(upViuel);
+    return await this.visuelRepository.save(upVisuel);
     // Cette action permet de modifier un visuel par son id;
   }
 

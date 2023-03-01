@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { NotFoundException } from '@nestjs/common/exceptions';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -40,8 +41,8 @@ export class NotesMidiService {
     updateNoteMidiDto: UpdateNoteMidiDto,
   ): Promise<NoteMidi> {
     const upNoteMidi = await this.findOne(id);
-    upNoteMidi.NoteNumber = updateNoteMidiDto.NoteNumber;
-    upNoteMidi.Vélocité = updateNoteMidiDto.Vélocité;
+    // upNoteMidi.NoteNumber = updateNoteMidiDto.NoteNumber;
+    // upNoteMidi.Vélocité = updateNoteMidiDto.Vélocité;
     upNoteMidi.NoteString = updateNoteMidiDto.NoteString;
 
     return await this.noteMidiRepository.save(upNoteMidi);

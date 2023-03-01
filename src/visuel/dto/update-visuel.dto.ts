@@ -1,12 +1,12 @@
+import { Chanson } from 'src/chanson/entities/chanson.entity';
+import { NoteMidi } from 'src/note-midi/entities/note-midi.entity';
+
 /* eslint-disable prettier/prettier */
 export class UpdateVisuelDto {
   Visuel: string;
-  PgmMidi: number;
   CanalMidi: number;
+  PgmMidi: number;
   NoteMidi: number;
-  chanson:{
-    id: number
-    PgmMidi: number;
-    CanalMidi: number;
-  };
+  chanson: Chanson;
+  noteMidi: NoteMidi;
 }

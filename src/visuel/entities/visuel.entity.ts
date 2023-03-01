@@ -36,6 +36,9 @@ export class Visuel {
   })
   chanson: Chanson;
 
-  @ManyToOne(() => NoteMidi, (noteMidi) => noteMidi.visuel)
-  noteMidi: NoteMidi[];
+  @ManyToOne(() => NoteMidi, (noteMidi) => noteMidi.visuel, {
+    nullable: false,
+    eager: true,
+  })
+  noteMidi: NoteMidi;
 }
