@@ -14,11 +14,16 @@ import { Utilisateur } from './utilisateur/entities/utilisateur.entity';
 import { NoteMidi } from './note-midi/entities/note-midi.entity';
 import { CommandeMidi } from './commande-midi/entities/commande-midi.entity';
 import { AuthModule } from './auth/auth.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 dotenv.config({ path: '.env' });
 
 @Module({
   imports: [
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'files'),
+    }),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.POSTGRES_HOST,
