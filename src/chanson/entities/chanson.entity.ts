@@ -42,7 +42,7 @@ export class Chanson {
   PgmMidi: number;
 
   @ManyToOne(() => Utilisateur, (utilisateur) => utilisateur.chanson)
-  utilisateur: Utilisateur[];
+  utilisateur: Utilisateur;
 
   @OneToMany(() => Visuel, (visuel) => visuel.chanson)
   visuel: Visuel[];

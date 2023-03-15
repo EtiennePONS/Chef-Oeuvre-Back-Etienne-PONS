@@ -24,7 +24,7 @@ export class Visuel {
   Image: string;
 
   @ManyToOne(() => Utilisateur, (utilisateur) => utilisateur.visuel)
-  utilisateur: Utilisateur[];
+  utilisateur: Utilisateur;
 
   @ManyToOne(() => Chanson, (chanson) => chanson.visuel, {
     nullable: false,

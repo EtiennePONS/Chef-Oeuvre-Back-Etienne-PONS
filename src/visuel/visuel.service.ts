@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Utilisateur } from 'src/utilisateur/entities/utilisateur.entity';
 import { Repository } from 'typeorm';
 import { ChargeVisuelDto } from './dto/charge-visuel.dto';
 import { CreateVisuelDto } from './dto/create-visuel.dto';
@@ -13,11 +14,27 @@ export class VisuelsService {
     @InjectRepository(Visuel)
     private visuelRepository: Repository<Visuel>,
   ) {}
-  async create(createVisuelDto: CreateVisuelDto): Promise<Visuel> {
-    return await this.visuelRepository.save(createVisuelDto);
+  async create(
+    createVisuelDto: CreateVisuelDto,
+    user: Utilisateur,
+  ): Promise<Visuel> {
+    const visuelPersonnalise = this.visuelRepository.create({
+      Visuel: createVisuelDto.Visuel,
+      CanalMidi: createVisuelDto.CanalMidi,
+      PgmMidi: createVisuelDto.PgmMidi,
+      NoteMidi: createVisuelDto.NoteMidi,
+      chanson: createVisuelDto.chanson,
+      noteMidi: createVisuelDto.noteMidi,
+      Image: createVisuelDto.Image,
+      utilisateur: user,
+    });
+    return await this.visuelRepository.save(visuelPersonnalise);
     // Cette action permet de creer un nouveau visuel;
   }
-  async charge(chargeVisuelDto: ChargeVisuelDto): Promise<Visuel> {
+  async charge(
+    chargeVisuelDto: ChargeVisuelDto,
+    user: Utilisateur,
+  ): Promise<Visuel> {
     const CanalMidi = chargeVisuelDto.CanalMidi;
     const PgmMidi = chargeVisuelDto.PgmMidi;
     const NoteMidi = chargeVisuelDto.NoteMidi;
@@ -26,6 +43,7 @@ export class VisuelsService {
       CanalMidi,
       PgmMidi,
       NoteMidi,
+      utilisateur: user,
     });
 
     if (!visuelfound) {
@@ -36,8 +54,10 @@ export class VisuelsService {
     return visuelfound;
     // Cette action renvoi d'un visuel en fonction du body envoyé dans la requette;
   }
-  async findAll(): Promise<Visuel[]> {
-    return await this.visuelRepository.find();
+  async findAll(user: Utilisateur): Promise<Visuel[]> {
+    return await this.visuelRepository.findBy({
+      utilisateur: user,
+    });
     // Cette action renvoi l'ensemble des visuels;
   }
 
@@ -54,7 +74,11 @@ export class VisuelsService {
     // Cette action permet de renvoyer un visuel par son id;
   }
 
-  async update(id: number, updateVisuelDto: UpdateVisuelDto): Promise<Visuel> {
+  async update(
+    id: number,
+    updateVisuelDto: UpdateVisuelDto,
+    user: Utilisateur,
+  ): Promise<Visuel> {
     const upVisuel = await this.findOne(id);
     upVisuel.Visuel = updateVisuelDto.Visuel;
     upVisuel.CanalMidi = updateVisuelDto.CanalMidi;
@@ -62,12 +86,17 @@ export class VisuelsService {
     upVisuel.NoteMidi = updateVisuelDto.NoteMidi;
     upVisuel.chanson = updateVisuelDto.chanson;
     upVisuel.noteMidi = updateVisuelDto.noteMidi;
+    upVisuel.utilisateur = user;
     return await this.visuelRepository.save(upVisuel);
+
     // Cette action permet de modifier un visuel par son id;
   }
 
-  async remove(id: number): Promise<string> {
-    const Result = await this.visuelRepository.delete({ id });
+  async remove(id: number, user: Utilisateur): Promise<string> {
+    const Result = await this.visuelRepository.delete({
+      id,
+      utilisateur: user,
+    });
     if (Result.affected === 0) {
       throw new NotFoundException(
         `Suppression impossible, car il n'y a pas de visuel avec l'id ${id}`,
