@@ -31,7 +31,11 @@ export class ChansonController {
   }
 
   @Post('/charge')
-  charge(@Body() chargeChansonDto: ChargeChansonDto, user: Utilisateur) {
+  @UseGuards(AuthGuard('jwt'))
+  charge(
+    @Body() chargeChansonDto: ChargeChansonDto,
+    @GetUser() user: Utilisateur,
+  ) {
     return this.chansonService.charge(chargeChansonDto, user);
   }
 
@@ -42,6 +46,7 @@ export class ChansonController {
   }
 
   @Get(':id')
+  @UseGuards(AuthGuard('jwt'))
   findOne(@Param('id') id: string) {
     return this.chansonService.findOne(+id);
   }

@@ -2,12 +2,12 @@ import { Chanson } from 'src/chanson/entities/chanson.entity';
 import { Visuel } from 'src/visuel/entities/visuel.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity({ name: 'musicienUtilisateur' })
+@Entity({ name: 'Musicien-Utilisateur' })
 export class Utilisateur {
   @PrimaryGeneratedColumn()
   id?: number;
 
-  @Column({ nullable: true, type: 'varchar', length: 50 })
+  @Column({ nullable: false, type: 'varchar', length: 50 })
   Firstname: string;
 
   @Column({ nullable: false, type: 'varchar', length: 50 })

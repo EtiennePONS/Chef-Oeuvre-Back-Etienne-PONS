@@ -3,24 +3,24 @@ import { NoteMidi } from 'src/note-midi/entities/note-midi.entity';
 import { Utilisateur } from 'src/utilisateur/entities/utilisateur.entity';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity({ name: 'Visuels' })
+@Entity({ name: 'Visuel' })
 export class Visuel {
   @PrimaryGeneratedColumn()
   id?: number;
 
-  @Column({ nullable: true, type: 'varchar', length: 100 })
+  @Column({ nullable: false, type: 'varchar', length: 100 })
   Visuel: string;
 
-  @Column()
+  @Column({ nullable: false })
   CanalMidi: number;
 
-  @Column()
+  @Column({ nullable: false })
   PgmMidi: number;
 
-  @Column()
+  @Column({ nullable: false })
   NoteMidi: number;
 
-  @Column({ nullable: true })
+  @Column({ nullable: false, type: 'varchar', length: 255 })
   Image: string;
 
   @ManyToOne(() => Utilisateur, (utilisateur) => utilisateur.visuel)

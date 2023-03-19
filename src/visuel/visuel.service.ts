@@ -31,6 +31,7 @@ export class VisuelsService {
     return await this.visuelRepository.save(visuelPersonnalise);
     // Cette action permet de creer un nouveau visuel;
   }
+
   async charge(
     chargeVisuelDto: ChargeVisuelDto,
     user: Utilisateur,
@@ -54,6 +55,7 @@ export class VisuelsService {
     return visuelfound;
     // Cette action renvoi d'un visuel en fonction du body envoyé dans la requette;
   }
+
   async findAll(user: Utilisateur): Promise<Visuel[]> {
     return await this.visuelRepository.findBy({
       utilisateur: user,

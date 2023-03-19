@@ -9,12 +9,12 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-@Entity({ name: 'Chansons' })
+@Entity({ name: 'Chanson' })
 export class Chanson {
   @PrimaryGeneratedColumn()
   id?: number;
 
-  @Column({ nullable: false, type: 'varchar', length: 100 })
+  @Column({ nullable: false, type: 'varchar', length: 150 })
   Titre: string;
 
   // @Column({ nullable: false, type: 'varchar', length: 50 })
@@ -35,10 +35,10 @@ export class Chanson {
   // @Column({ nullable: false, type: 'varchar', length: 100 })
   // Image: string;
 
-  @Column()
+  @Column({ nullable: false })
   CanalMidi: number;
 
-  @Column()
+  @Column({ nullable: false })
   PgmMidi: number;
 
   @ManyToOne(() => Utilisateur, (utilisateur) => utilisateur.chanson)
